@@ -25,6 +25,14 @@
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pvvng/use-emoji-effects"
+  },
+  "bugs": {
+    "url": "https://github.com/pvvng/use-emoji-effects/issues"
+  },
+  "homepage": "https://github.com/pvvng/use-emoji-effects#readme",
   "files": ["dist"],
   "private": false,
   "type": "module",
