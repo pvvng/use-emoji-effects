@@ -1,0 +1,42 @@
+{
+  "name": "use-emoji-effects",
+  "version": "0.0.1",
+  "description": "Simple React hooks for delightful emoji animations that respond to user interactions.",
+  "keywords": [
+    "emoji effects",
+    "emoji animation",
+    "animation",
+    "react hooks",
+    "interactive animations",
+    "cute animations",
+    "emoji trail",
+    "cursor",
+    "cursor trail",
+    "emoji explosion",
+    "user interaction effects",
+    "mouse trail effect",
+    "click animation",
+    "frontend animation",
+    "UI effects",
+    "react animation library",
+    "fun UI",
+    "lightweight animation"
+  ],
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "private": false,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0 <20.0.0",
+    "react-dom": ">=18.0.0 <20.0.0"
+  },
+  "license": "MIT"
+}
