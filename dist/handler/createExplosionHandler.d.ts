@@ -1,5 +1,5 @@
 import { createElementPool } from '../utils';
-interface ClickHandlerOptions {
+interface ClickExplosionOptions {
     emojiPool: ReturnType<typeof createElementPool>;
     emojis: string[];
     emojiSize: number;
@@ -7,5 +7,5 @@ interface ClickHandlerOptions {
     transition: number;
     spread: number;
 }
-export declare function createClickHandler({ emojiPool, emojis, emojiSize, emojiCount, transition, spread, }: ClickHandlerOptions): (e: MouseEvent) => void;
+export declare function createExplosionHandler({ emojiPool, emojis, emojiSize, emojiCount, transition, spread, }: ClickExplosionOptions): (e: MouseEvent) => void;
 export {};
