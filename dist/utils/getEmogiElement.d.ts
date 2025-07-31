@@ -13,5 +13,5 @@ interface MarkerEmojiStyleOptions extends BaseEmojiStyleOptions {
     xPercent: number;
     yPercent: number;
 }
-export declare function applyMakerEmojiStyle(el: HTMLElement, { emoji, xPercent, yPercent, size }: MarkerEmojiStyleOptions): HTMLElement;
+export declare function applyMarkerEmojiStyle(el: HTMLElement, { emoji, xPercent, yPercent, size }: MarkerEmojiStyleOptions): HTMLElement;
 export {};

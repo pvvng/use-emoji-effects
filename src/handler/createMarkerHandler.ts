@@ -1,24 +1,24 @@
 import {
-  applyMakerEmojiStyle,
+  applyMarkerEmojiStyle,
   createElementPool,
   getRandomEmoji,
 } from "../utils";
 
-interface EmojiMakerOptions {
+interface EmojiMarkerOptions {
   emojiPool: ReturnType<typeof createElementPool>;
   emojis: string[];
   emojiSize: number;
-  makerCount: number;
+  markerCount: number;
   getTargetRect: () => DOMRect | null;
 }
 
-export function createMakerHandler({
+export function createMarkerHandler({
   emojiPool,
   emojis,
   emojiSize,
-  makerCount,
+  markerCount,
   getTargetRect,
-}: EmojiMakerOptions) {
+}: EmojiMarkerOptions) {
   return (e: MouseEvent) => {
     const rect = getTargetRect();
     if (!rect) return;
@@ -28,9 +28,9 @@ export function createMakerHandler({
 
     const emoji = getRandomEmoji(emojis);
 
-    let emojiEl = emojiPool.get(makerCount - 1, "FIFO");
+    let emojiEl = emojiPool.get(markerCount - 1, "FIFO");
 
-    emojiEl = applyMakerEmojiStyle(emojiEl, {
+    emojiEl = applyMarkerEmojiStyle(emojiEl, {
       emoji,
       xPercent,
       yPercent,

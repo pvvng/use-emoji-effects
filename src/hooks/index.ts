@@ -1,3 +1,3 @@
 export { useEmojiExplosion } from "./useEmojiExplosion";
 export { useEmojiTrail } from "./useEmojiTrail";
-export { useEmojiMaker } from "./useEmojiMaker";
+export { useEmojiMarker } from "./useEmojiMarker";

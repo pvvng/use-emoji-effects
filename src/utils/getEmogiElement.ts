@@ -51,8 +51,8 @@ interface MarkerEmojiStyleOptions extends BaseEmojiStyleOptions {
   yPercent: number; // 퍼센트
 }
 
-/** maker 가변 스타일 적용 */
-export function applyMakerEmojiStyle(
+/** marker 가변 스타일 적용 */
+export function applyMarkerEmojiStyle(
   el: HTMLElement,
   { emoji, xPercent, yPercent, size }: MarkerEmojiStyleOptions
 ) {

@@ -4,29 +4,29 @@ import {
   setRelativeIfStatic,
   createElementPool,
 } from "../utils";
-import { createMakerHandler } from "../handler";
+import { createMarkerHandler } from "../handler";
 
-interface EmojiMakerOptions {
+interface EmojiMarkerOptions {
   emojis?: string[];
   emojiSize?: number;
-  makerCount?: number;
+  markerCount?: number;
 }
 
-export function useEmojiMaker<T extends HTMLElement = HTMLDivElement>(
-  options: EmojiMakerOptions = {}
+export function useEmojiMarker<T extends HTMLElement = HTMLDivElement>(
+  options: EmojiMarkerOptions = {}
 ) {
-  const { emojis = ["📌"], emojiSize = 24, makerCount = 20 } = options;
+  const { emojis = ["📌"], emojiSize = 24, markerCount = 20 } = options;
 
   const ref = useRef<T>(null);
   const stableEmojis = useMemo(() => emojis, [JSON.stringify(emojis)]); // effect 의존성 배열용 stable한 emojis
   const emojiPool = useMemo(() => createElementPool(createEmojiElement), []); // 전역 emoji pool 생성
   const handler = useMemo(
     () =>
-      createMakerHandler({
+      createMarkerHandler({
         emojiPool,
         emojis,
         emojiSize,
-        makerCount,
+        markerCount,
         getTargetRect: () => ref.current?.getBoundingClientRect() ?? null,
       }),
     [emojiPool, emojis, emojiSize]

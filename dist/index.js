@@ -79,7 +79,7 @@ function k({
   emojiPool: t,
   emojis: e,
   emojiSize: r,
-  makerCount: s,
+  markerCount: s,
   getTargetRect: o
 }) {
   return (n) => {
@@ -147,12 +147,12 @@ function b(t = {}) {
   }, [c, r, s, o]), n;
 }
 function I(t = {}) {
-  const { emojis: e = ["📌"], emojiSize: r = 24, makerCount: s = 20 } = t, o = f(null), n = y(() => e, [JSON.stringify(e)]), i = y(() => d(E), []), c = y(
+  const { emojis: e = ["📌"], emojiSize: r = 24, markerCount: s = 20 } = t, o = f(null), n = y(() => e, [JSON.stringify(e)]), i = y(() => d(E), []), c = y(
     () => k({
       emojiPool: i,
       emojis: e,
       emojiSize: r,
-      makerCount: s,
+      markerCount: s,
       getTargetRect: () => o.current?.getBoundingClientRect() ?? null
     }),
     [i, e, r]
@@ -165,6 +165,6 @@ function I(t = {}) {
 }
 export {
   F as useEmojiExplosion,
-  I as useEmojiMaker,
+  I as useEmojiMarker,
   b as useEmojiTrail
 };
