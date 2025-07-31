@@ -4,7 +4,7 @@ import {
   createElementPool,
   setRelativeIfStatic,
 } from "../utils";
-import { createClickHandler } from "../handler";
+import { createExplosionHandler } from "../handler";
 
 interface EmojiExplosionOptions {
   emojis?: string[];
@@ -31,7 +31,7 @@ export function useEmojiExplosion<T extends HTMLElement = HTMLButtonElement>(
   const emojiPool = useMemo(() => createElementPool(createEmojiElement), []); // 전역 emoji pool 생성
   const handleClick = useMemo(
     () =>
-      createClickHandler({
+      createExplosionHandler({
         emojiPool,
         emojis: stableEmojis,
         emojiSize,
