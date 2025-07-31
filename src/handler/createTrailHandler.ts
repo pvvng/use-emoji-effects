@@ -1,6 +1,6 @@
 import {
   type createElementPool,
-  applyEmojiStyle,
+  applyMotionEmojiStyle,
   getRandomEmoji,
 } from "../utils";
 
@@ -21,7 +21,7 @@ export function createTrailHandler({
   emitInterval,
   lastEmitRef,
 }: TrailHandlerOptions) {
-  return function handleMouseMove(e: MouseEvent) {
+  return (e: MouseEvent) => {
     const now = Date.now();
     if (now - lastEmitRef.current < emitInterval) return;
     lastEmitRef.current = now;
@@ -30,7 +30,7 @@ export function createTrailHandler({
     const emoji = getRandomEmoji(emojis);
 
     let emojiEl = emojiPool.get();
-    emojiEl = applyEmojiStyle(emojiEl, {
+    emojiEl = applyMotionEmojiStyle(emojiEl, {
       emoji,
       x,
       y,

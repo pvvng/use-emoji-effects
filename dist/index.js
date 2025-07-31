@@ -1,129 +1,170 @@
-import { useRef as p, useMemo as d, useEffect as E } from "react";
-function v(e) {
-  const o = [];
-  return { get: () => o.pop() ?? e(), release: (n) => o.push(n) };
+import { useRef as f, useMemo as y, useEffect as p } from "react";
+function d(t) {
+  const e = [];
+  return { get: (n = 0, i = "LIFO") => e.length > n ? i === "FIFO" ? e.shift() : e.pop() : t(), release: (n) => e.push(n), size: () => e.length };
 }
-function j() {
-  const e = document.createElement("span");
-  return e.style.opacity = "1", e.style.transition = "none", e.style.position = "fixed", e.style.left = "0px", e.style.top = "0px", e.style.pointerEvents = "none", e.style.zIndex = "99999", e.style.opacity = "1", e;
+function E() {
+  const t = document.createElement("span");
+  return t.style.opacity = "1", t.style.transition = "none", t.style.position = "fixed", t.style.left = "0px", t.style.top = "0px", t.style.pointerEvents = "none", t.style.zIndex = "99999", t.style.opacity = "1", t.style.willChange = "transform, opacity", t;
 }
-function x(e, { emoji: o, x: r, y: t, size: n, duration: s }) {
-  return e.style.opacity = "1", e.style.transition = "none", e.textContent = o, e.style.transform = `translate(${r}px, ${t}px)`, e.style.fontSize = `${n}px`, e.style.transition = `transform ${s}ms ease-out, opacity ${s}ms ease-out`, e;
+function v(t, { emoji: e, x: r, y: s, size: o, duration: n }) {
+  return t.style.opacity = "1", t.style.transition = "none", t.textContent = e, t.style.transform = `translate(${r}px, ${s}px)`, t.style.fontSize = `${o}px`, t.style.transition = `transform ${n}ms ease-out, opacity ${n}ms ease-out`, t;
 }
-const h = (e) => e[Math.floor(Math.random() * e.length)];
-function $(e) {
-  getComputedStyle(e).position === "static" && (e.style.position = "relative");
+function S(t, { emoji: e, xPercent: r, yPercent: s, size: o }) {
+  return t.style.position = "absolute", t.textContent = e, t.style.left = `${r}%`, t.style.top = `${s}%`, t.style.transform = "translate(-50%, -50%)", t.style.fontSize = `${o}px`, t;
 }
-function S({
-  emojiPool: e,
-  emojis: o,
+const g = (t) => t[Math.floor(Math.random() * t.length)];
+function j(t) {
+  getComputedStyle(t).position === "static" && (t.style.position = "relative");
+}
+function z({
+  emojiPool: t,
+  emojis: e,
   emojiSize: r,
-  emojiCount: t,
-  transition: n,
-  spread: s
+  emojiCount: s,
+  transition: o,
+  spread: n
 }) {
-  return (y) => {
-    const { clientX: a, clientY: l } = y;
-    for (let m = 0; m < t; m++) {
-      const i = h(o);
-      let c = e.get();
-      c = x(c, {
-        emoji: i,
-        x: a,
-        y: l,
+  return (i) => {
+    const { clientX: c, clientY: m } = i;
+    for (let u = 0; u < s; u++) {
+      const l = g(e);
+      let a = t.get();
+      a = v(a, {
+        emoji: l,
+        x: c,
+        y: m,
         size: r,
-        duration: n
-      }), document.body.appendChild(c);
-      const u = (Math.random() - 0.5) * s, g = (Math.random() - 0.5) * s, M = 0.5 + Math.random();
+        duration: o
+      }), document.body.appendChild(a);
+      const x = (Math.random() - 0.5) * n, $ = (Math.random() - 0.5) * n, M = 0.5 + Math.random();
       requestAnimationFrame(() => {
-        c.style.transition = `opacity ${n}ms ease, transform ${n}ms ease`, c.style.opacity = "0", c.style.transform = `translate(${a + u}px, ${l + g}px) scale(${M})`;
+        a.style.transition = `opacity ${o}ms ease, transform ${o}ms ease`, a.style.opacity = "0", a.style.transform = `translate(${c + x}px, ${m + $}px) scale(${M})`;
       });
-      const f = () => {
-        c.removeEventListener("transitionend", f), e.release(c), c.remove();
+      const h = () => {
+        a.removeEventListener("transitionend", h), t.release(a), a.remove();
       };
-      c.addEventListener("transitionend", f);
+      a.addEventListener("transitionend", h);
     }
   };
 }
 function C({
-  emojiPool: e,
-  emojis: o,
+  emojiPool: t,
+  emojis: e,
   emojiSize: r,
-  transition: t,
-  emitInterval: n,
-  lastEmitRef: s
+  transition: s,
+  emitInterval: o,
+  lastEmitRef: n
 }) {
-  return function(a) {
-    const l = Date.now();
-    if (l - s.current < n) return;
-    s.current = l;
-    const { clientX: m, clientY: i } = a, c = h(o);
-    let u = e.get();
-    u = x(u, {
-      emoji: c,
+  return (i) => {
+    const c = Date.now();
+    if (c - n.current < o) return;
+    n.current = c;
+    const { clientX: m, clientY: u } = i, l = g(e);
+    let a = t.get();
+    a = v(a, {
+      emoji: l,
       x: m,
-      y: i,
+      y: u,
       size: r,
-      duration: t
-    }), document.body.appendChild(u), requestAnimationFrame(() => {
-      u.style.transition = `opacity ${t}ms ease, transform ${t}ms ease`, u.style.opacity = "0";
+      duration: s
+    }), document.body.appendChild(a), requestAnimationFrame(() => {
+      a.style.transition = `opacity ${s}ms ease, transform ${s}ms ease`, a.style.opacity = "0";
     }), setTimeout(() => {
-      e.release(u), u.remove();
-    }, t);
+      t.release(a), a.remove();
+    }, s);
   };
 }
-function L(e = {}) {
-  const {
-    emojis: o = ["💥", "✨", "❤️", "⭐️", "😘"],
-    emojiSize: r = 16,
-    emojiCount: t = 32,
-    transition: n = 1200,
-    spread: s = 256
-  } = e, y = p(null), a = d(() => o, [JSON.stringify(o)]), l = d(() => v(j), []), m = d(
-    () => S({
-      emojiPool: l,
-      emojis: a,
-      emojiSize: r,
-      emojiCount: t,
-      transition: n,
-      spread: s
-    }),
-    [l, a, r, t, n, s]
-  );
-  return E(() => {
-    const i = y.current;
-    if (i)
-      return $(i), i.addEventListener("click", m), () => {
-        i.removeEventListener("click", m);
-      };
-  }, [a, r, n, t, s]), y;
+function k({
+  emojiPool: t,
+  emojis: e,
+  emojiSize: r,
+  markerCount: s,
+  getTargetRect: o
+}) {
+  return (n) => {
+    const i = o();
+    if (!i) return;
+    const c = (n.clientX - i.left) / i.width * 100, m = (n.clientY - i.top) / i.height * 100, u = g(e);
+    let l = t.get(s - 1, "FIFO");
+    l = S(l, {
+      emoji: u,
+      xPercent: c,
+      yPercent: m,
+      size: r
+    }), n.currentTarget.appendChild(l), t.release(l);
+  };
 }
-function b(e = {}) {
+function F(t = {}) {
   const {
-    emojis: o = ["🐾", "🐱", "🍀"],
+    emojis: e = ["💥", "✨", "❤️", "⭐️", "😘"],
     emojiSize: r = 16,
-    transition: t = 1200,
-    emitInterval: n = 40
-  } = e, s = p(null), y = p(0), a = d(() => o, [JSON.stringify(o)]), l = d(() => v(j), []), m = d(
-    () => C({
-      emojiPool: l,
-      emojis: a,
+    emojiCount: s = 32,
+    transition: o = 1200,
+    spread: n = 256
+  } = t, i = f(null), c = y(() => e, [JSON.stringify(e)]), m = y(() => d(E), []), u = y(
+    () => z({
+      emojiPool: m,
+      emojis: c,
       emojiSize: r,
-      transition: t,
-      emitInterval: n,
-      lastEmitRef: y
+      emojiCount: s,
+      transition: o,
+      spread: n
     }),
-    [l, a, r, t, n]
+    [m, c, r, s, o, n]
   );
-  return E(() => {
-    const i = s.current;
-    if (i)
-      return $(i), i.addEventListener("mousemove", m), () => {
-        i.removeEventListener("mousemove", m);
+  return p(() => {
+    const l = i.current;
+    if (l)
+      return j(l), l.addEventListener("click", u), () => {
+        l.removeEventListener("click", u);
       };
-  }, [a, r, t, n]), s;
+  }, [c, r, o, s, n]), i;
+}
+function b(t = {}) {
+  const {
+    emojis: e = ["🐾", "🐱", "🍀"],
+    emojiSize: r = 16,
+    transition: s = 1200,
+    emitInterval: o = 10
+  } = t, n = f(null), i = f(0), c = y(() => e, [JSON.stringify(e)]), m = y(() => d(E), []), u = y(
+    () => C({
+      emojiPool: m,
+      emojis: c,
+      emojiSize: r,
+      transition: s,
+      emitInterval: o,
+      lastEmitRef: i
+    }),
+    [m, c, r, s, o]
+  );
+  return p(() => {
+    const l = n.current;
+    if (l)
+      return j(l), l.addEventListener("mousemove", u), () => {
+        l.removeEventListener("mousemove", u);
+      };
+  }, [c, r, s, o]), n;
+}
+function I(t = {}) {
+  const { emojis: e = ["📌"], emojiSize: r = 24, markerCount: s = 20 } = t, o = f(null), n = y(() => e, [JSON.stringify(e)]), i = y(() => d(E), []), c = y(
+    () => k({
+      emojiPool: i,
+      emojis: e,
+      emojiSize: r,
+      markerCount: s,
+      getTargetRect: () => o.current?.getBoundingClientRect() ?? null
+    }),
+    [i, e, r]
+  );
+  return p(() => {
+    const m = o.current;
+    if (m)
+      return j(m), m.addEventListener("click", c), () => m.removeEventListener("click", c);
+  }, [n, r]), o;
 }
 export {
-  L as useEmojiExplosion,
+  F as useEmojiExplosion,
+  I as useEmojiMarker,
   b as useEmojiTrail
 };

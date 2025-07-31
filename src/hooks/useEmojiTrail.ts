@@ -20,7 +20,7 @@ export function useEmojiTrail<T extends HTMLElement = HTMLDivElement>(
     emojis = ["🐾", "🐱", "🍀"],
     emojiSize = 16,
     transition = 1200,
-    emitInterval = 40,
+    emitInterval = 10,
   } = options;
 
   const ref = useRef<T>(null);

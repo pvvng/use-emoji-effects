@@ -1,10 +1,10 @@
 import {
   type createElementPool,
-  applyEmojiStyle,
+  applyMotionEmojiStyle,
   getRandomEmoji,
 } from "../utils";
 
-interface ClickHandlerOptions {
+interface ClickExplosionOptions {
   emojiPool: ReturnType<typeof createElementPool>;
   emojis: string[];
   emojiSize: number;
@@ -13,14 +13,14 @@ interface ClickHandlerOptions {
   spread: number;
 }
 
-export function createClickHandler({
+export function createExplosionHandler({
   emojiPool,
   emojis,
   emojiSize,
   emojiCount,
   transition,
   spread,
-}: ClickHandlerOptions) {
+}: ClickExplosionOptions) {
   return (e: MouseEvent) => {
     const { clientX: x, clientY: y } = e;
 
@@ -28,7 +28,7 @@ export function createClickHandler({
       const emoji = getRandomEmoji(emojis);
 
       let emojiEl = emojiPool.get();
-      emojiEl = applyEmojiStyle(emojiEl, {
+      emojiEl = applyMotionEmojiStyle(emojiEl, {
         emoji,
         x,
         y,
